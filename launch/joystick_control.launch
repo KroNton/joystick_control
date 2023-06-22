@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch> 
+ 
+  <node name="joystick_robot_controller" pkg="joystick_control" type="joy_robot_control"/>
+
+  <node name="joystick_driver" pkg="joy" type="joy_node">
+    <param name="dev" value="/dev/input/js0"/>
+  </node>
+
+</launch>
