@@ -11,6 +11,17 @@ The **ROS Joystick Control Package** is a ROS (Robot Operating System) package d
 - Customizable settings and configurations
 - Example launch files and code for reference and testing
 
+## Nodes
+1. [**joy_node**](http://wiki.ros.org/joy)
+   
+2. **joy_robot_control**
+   
+   2.1 Subscribed Topics:
+   
+         joy(sensor_msgs/Joy)
+   
+   2.2 Published Topics:
+
 ## Installation
 
 To use the **ROS Joystick Control Package**, follow these steps:
@@ -26,6 +37,12 @@ To use the **ROS Joystick Control Package**, follow these steps:
    ```bash
    cd ~/catkin_ws/src
    git clone https://github.com/KroNton/joystick_control.git
+
+   
 ## License
-  The ROS **Joystick Control Package** is open source and is distributed under the [MIT License](https://opensource.org/license/mit/) . You are free to use, modify, and distribute the package in both personal and commercial projects.
+  The  **Joystick Control Package** is open source and is distributed under the [MIT License](https://opensource.org/license/mit/). You are free to use, modify, and distribute the package in both personal and commercial projects.
+  
+## Support
+If you encounter any issues or have questions regarding the **Joystick Control Package**, please open an issue on the GitHub repository. The project maintainers will do their best to assist you.
+
 
