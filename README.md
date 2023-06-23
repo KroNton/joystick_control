@@ -4,23 +4,36 @@ The **ROS Joystick Control Package** is a ROS (Robot Operating System) package d
 
 ## Features
 
-- Read joystick position (X and Y coordinates)
-- Support for different joystick types (analog, digital)
-- Publish joystick position as ROS messages
-- Easy integration with ROS Noetic
-- Customizable settings and configurations
-- Example launch files and code for reference and testing
+- Read the joystick position (X and Y coordinates).
+- increase & decrease the robot's velocity (linear and angular).
+- Support for different joystick types (analog, digital).
+- Publish the joystick position as ROS messages.
+- Easy integration with ROS Noetic.
+- Customizable settings and configurations.
+
 
 ## Nodes
-1. [**joy_node**](http://wiki.ros.org/joy)
+1. **joy_node**  [official page](http://wiki.ros.org/joy)
    
 2. **joy_robot_control**
    
    2.1 Subscribed Topics:
    
-         joy(sensor_msgs/Joy)
+      - /joy (sensor_msgs/Joy)
    
    2.2 Published Topics:
+
+      - /cmd_vel (geometry_msgs/Twist)
+        
+   2.3 Parameters:
+   
+      - ~cmd_vel_topic (default: "/cmd_vel")
+      - ~linear_direction_index (default: "1")
+      - ~angular_direction_index (default: "0")
+      - ~linear_speed_increase_index (default: "0")
+      - ~linear_speed_decrease_index (default: "1")
+      - ~angular_speed_increase_index (default: "3")
+      - ~angular_speed_decrease_index (default: "2")
 
 ## Installation
 
@@ -32,12 +45,33 @@ To use the **ROS Joystick Control Package**, follow these steps:
    mkdir -p ~/catkin_ws/src
    cd ~/catkin_ws/
    catkin_make
+   
 2. Clone the repository into your ROS workspace's `src` directory:
    
    ```bash
    cd ~/catkin_ws/src
    git clone https://github.com/KroNton/joystick_control.git
+   
+3. Install any necessary dependencies using ROS package manager:
+   
+   ```bash
+   cd ~/catkin_ws/
+   rosdep install --from-paths src --ignore-src -r -y
+   
+4. Build the ROS package:
+   
+    ```bash
+    cd ~/catkin_ws/
+    catkin_make
+## Usage
+**Launching Joystick Node**
 
+To launch the joystick node and start reading joystick data, use the following command:
+   ```bash
+   roslaunch joystick_control joystick_control.launch
+   ```
+   
+This will start the joystick node, which reads the joystick position and publishes it as Twist message.
    
 ## License
   The  **Joystick Control Package** is open source and is distributed under the [MIT License](https://opensource.org/license/mit/). You are free to use, modify, and distribute the package in both personal and commercial projects.
