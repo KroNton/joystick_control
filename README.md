@@ -72,7 +72,11 @@ To launch the joystick node and start reading joystick data, use the following c
    ```
    
 This will start the joystick node, which reads the joystick position and publishes it as Twist message.
-   
+
+![Joystick Robot Controller](https://github.com/KroNton/joystick_control/blob/main/images/joystick_control.png)
+
+   ![simulation Robot Control](https://github.com/KroNton/joystick_control/blob/main/images/control_robot.gif)
+
 ## License
   The  **Joystick Control Package** is open source and is distributed under the [MIT License](https://opensource.org/license/mit/). You are free to use, modify, and distribute the package in both personal and commercial projects.
   
