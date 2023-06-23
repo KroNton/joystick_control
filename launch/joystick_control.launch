@@ -1,7 +1,20 @@
 <?xml version="1.0"?>
 <launch> 
  
-  <node name="joystick_robot_controller" pkg="joystick_control" type="joy_robot_control"/>
+  <node name="joystick_robot_controller" pkg="joystick_control" type="joy_robot_control">
+
+                <!-- output command velocity topic  -->
+    <param name="cmd_vel_topic" value="/cmd_vel"/>
+    
+                <!-- Joysick controller index values  -->
+    <param name="linear_direction_index"       value="1"/>
+    <param name="angular_direction_index"      value="0"/>
+    <param name="linear_speed_increase_index"  value="0"/>
+    <param name="linear_speed_decrease_index"  value="1"/>
+    <param name="angular_speed_increase_index" value="3"/>
+    <param name="angular_speed_decrease_index" value="2"/>
+
+  </node>
 
   <node name="joystick_driver" pkg="joy" type="joy_node">
     <param name="dev" value="/dev/input/js0"/>

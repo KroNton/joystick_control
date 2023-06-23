@@ -10,21 +10,46 @@ class JoystickNode {
 
     ros::Publisher  vel_pub;
     ros::Subscriber joy_subscriber;
-    ros::NodeHandle n;
+    
+   
     geometry_msgs::Twist vel_msg;
     
     float   axes[5];
     float  buttons[11];
+
     bool data_recived=false;
+
     float linear_speed=0.25,
-         angular_speed=0.5;
+           angular_speed=0.5;
+
+    std::string cmd_vel_topic="cmd_vel";
+
+    int index1=1;
+    int index2=0;
+    int index3=0;
+    int index4=1;
+    int index5=3;
+    int index6=2;
 
     public:
 
     JoystickNode(){
-        vel_pub = n.advertise<geometry_msgs::Twist>("cmd_vel", 10); 
+        ros::NodeHandle n;
+        ros::NodeHandle nh("~");
+        nh.getParam("cmd_vel_topic", cmd_vel_topic);
+        nh.getParam("linear_direction_index", index1);
+        nh.getParam("angular_direction_index", index2);
+        nh.getParam("linear_speed_increase_index", index3);
+        nh.getParam("linear_speed_decrease_index", index4);
+        nh.getParam("angular_speed_increase_index", index5);
+        nh.getParam("angular_speed_decrease_index", index6);
+
+        vel_pub = n.advertise<geometry_msgs::Twist>(cmd_vel_topic, 10); 
         joy_subscriber = n.subscribe("joy",10, &JoystickNode::joy_callback, this);
+
+
     }
+
 
     void joy_callback(const sensor_msgs::Joy  &msg){
 
@@ -47,8 +72,8 @@ class JoystickNode {
        if (data_recived)
         {  
 
-            vel_msg.linear.x  =  axes[1]* linear_speed ;
-            vel_msg.angular.z =  axes[0]* angular_speed; 
+            vel_msg.linear.x  =  axes[index1]* linear_speed ;
+            vel_msg.angular.z =  axes[index2]* angular_speed; 
             
             vel_pub.publish(vel_msg);
 
@@ -59,25 +84,26 @@ class JoystickNode {
 
        if (data_recived)
         {  
-            if (buttons[0]==1)
+            if (buttons[index3]==1)
             {
                  linear_speed +=0.2;
             }
 
-            else if (buttons[1]==1)
+            else if (buttons[index4]==1 && linear_speed>0.2)
             {
                  linear_speed -=0.2;
             }   
 
-            else if (buttons[3]==1)
+            else if (buttons[index5]==1)
             {
                  angular_speed +=0.2;
             }    
                       
-            else if (buttons[2]==1)
+            else if (buttons[index6]==1&& angular_speed> 0.2)
             {
                  angular_speed -=0.2;
-            }             
+            }    
+       
         
         vel_pub.publish(vel_msg);
 
@@ -111,13 +137,13 @@ class JoystickNode {
 int main (int argc, char **argv)
 {
     ros::init(argc, argv, "joystick_node");
+    
 
     JoystickNode joystick;
     ros::Rate loop_rate(10);
 
     while (ros::ok())
     {
-
         joystick.speed_control();
         joystick.direction_control();
         
