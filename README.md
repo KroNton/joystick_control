@@ -1,6 +1,6 @@
 # joystick_controller Package
 
-The **ROS Joystick Control Package** is a ROS (Robot Operating System) package developed specifically for ROS Noetic. This package provides a convenient way to interface with a joystick input device and use its positional information for controlling robots or other ROS-enabled systems.
+The **Joystick Control Package** is a ROS package developed specifically for ROS Noetic. This package provides a convenient way to interface with a joystick input device and use its positional information for controlling robots or other ROS-enabled systems.
 
 ## Features
 
